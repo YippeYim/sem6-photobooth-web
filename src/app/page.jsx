@@ -1,18 +1,13 @@
 'use client'
 import Link from "next/link";
-import { GuidePicture } from "./components/guide-picture/GuidePicture";
+import { Button } from "./components/Button";
 
 export default function Home() {
 
   return <div>
     <h1 className='text-xl font-bold'>Home page</h1>
 
-    <ul>
-      <li><Link href="/">Go to home</Link></li>
-      <li><Link href="/photo-setting">Go to setting</Link></li>
-    </ul>
-    
-    <GuidePicture></GuidePicture>
+    <Button buttonType="primary"><Link href="/photo-setting">Start Choose Frame</Link></Button>
     
   </div>
 }
