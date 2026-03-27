@@ -40,13 +40,13 @@ export function GuidePicture() {
 
 
     </ul>
-        {urls[0] === "" ? null : (
-              <Image 
-                src={urls[0]} 
-                alt="pic" 
-                width={500} 
-                height={500} // Next.js Image requires height if not using 'fill'
-              />
-        )}
+    {urls?.length > 0 && urls[0] && (
+      <Image 
+        src={urls[0]} 
+        alt="pic" 
+        width={500} 
+        height={500} // Next.js Image requires height if not using 'fill'
+      />
+    )}
     </>
 }
