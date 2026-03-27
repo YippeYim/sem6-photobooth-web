@@ -41,5 +41,5 @@ export default function ResultPage() {
         Download
       </button>
     </div>
-  );
+  );   
 }
