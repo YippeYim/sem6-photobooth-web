@@ -5,6 +5,9 @@ import { useEffect, useState } from "react"
 
 import { ChooseDesign } from "../components/frame/ChooseDesign"
 import { ChoosePeopleSize } from "../components/frame/ChoosePeopleSize"
+import { PageLayout } from "../components/PageLayout"
+import { Header } from "../components/Header"
+import { FourChoiceGrid } from "../components/frame/FourChoiceGrid"
 
 export default function SettingPage(){
 
@@ -30,19 +33,25 @@ export default function SettingPage(){
         setFrameNum(choice)
 
         // mock
-        setUserSelection(prev=>({...prev, frame:"tttrt"}));
+        // setUserSelection(prev=>({...prev, frame:"tttrt"}));
     }
 
     return <>
+        <PageLayout>
+        <Header/>
         
         {/* choose how many frame */}
         {frameNum === null && (
-                <div>
-                    <Button onClick={()=>handleFrameNumSelect(2)}>2 Frames</Button>
-                    <Button onClick={()=>handleFrameNumSelect(3)}>3 Frames</Button>
-                    <Button onClick={()=>handleFrameNumSelect(4)}>4 Frames</Button>
-                    <Button onClick={()=>handleFrameNumSelect(6)}>6 Frames</Button>
-                </div>
+            <FourChoiceGrid>
+                <div className="flex flex-col justify-end items-center pb-4 text-6xl border border-black rounded rounded-[3rem] bg-white"
+                    onClick={()=>handleFrameNumSelect(2)}>2 Frames</div>
+                <div className="flex flex-col justify-end items-center pb-4 text-6xl border border-black rounded rounded-[3rem] bg-white"
+                    onClick={()=>handleFrameNumSelect(3)}>3 Frames</div>
+                <div className="flex flex-col justify-end items-center pb-4 text-6xl border border-black rounded rounded-[3rem] bg-white"
+                    onClick={()=>handleFrameNumSelect(4)}>4 Frames</div>
+                <div className="flex flex-col justify-end items-center pb-4 text-6xl border border-black rounded rounded-[3rem] bg-white"
+                    onClick={()=>handleFrameNumSelect(6)}>6 Frames</div>
+            </FourChoiceGrid>
             )}
         
         {/* choose the design */}
@@ -61,5 +70,7 @@ export default function SettingPage(){
                 Start
             </Button>
         )}
+        
+        </PageLayout>
     </>
 };

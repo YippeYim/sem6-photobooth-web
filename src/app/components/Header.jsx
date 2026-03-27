@@ -1,3 +1,3 @@
 export function Header(){
-    return <h1 className="text-4xl text-center">StickiSnap Booth</h1>
+    return <h1 className="text-5xl text-center mt-20">StickiSnap Booth</h1>
 }

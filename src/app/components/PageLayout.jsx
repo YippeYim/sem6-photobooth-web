@@ -21,8 +21,14 @@ export function PageLayout({children}) {
           backgroundPosition: '0 0, 50px 50px' // This 20px shift creates the staggered "polka" look
         }}
       />
-        
-        {children}
+      {/* LAYER 2: THE CONTENT (Top) 
+          By adding 'relative z-20', we force the white boxes 
+          to stay on top of the dots and the blue glow.
+      */}
+      <main className="relative z-20 w-full min-h-screen">
+          {children}
+      </main>
+  
       </div>
     </>
 }
