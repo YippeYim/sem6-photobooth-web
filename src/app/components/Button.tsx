@@ -1,7 +1,7 @@
 /**
  * A reusable button component with customizable styles.
  */
-
+'use client'
 // 1. Define the Interface
 interface ButtonProps {
   buttonType?: "primary" | "secondary";
