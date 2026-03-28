@@ -1,52 +1,65 @@
 import { useEffect, useState } from "react"
-import { useStorage } from "@/app/hooks/useStorage";
+import { useStorage } from "../../hooks/useStorage";
 import Image from "next/image";
 import { usePicture } from "../take-picture/usePicture";
 import { Button } from "../Button";
+import { getRandomInt } from "../../../lib/utils";
 
-export function GuidePicture() {
-    const [ peopleCount , setPeopleCount ] = useState(1);
+export function GuidePicture({ peopleCount, images }) {
     const { getAllImageUrlFromFolder } = useStorage();
-    
-    const [ urls , setUrl] = useState([]);
-    const [ localPhoto , setLocalPicture ] = useState({file:null});
-    const { downloadPicture, sharePicture, createTestFile} = usePicture();
+    const [urls, setUrls] = useState([]);
+    const [imageIndex, setImageIndex] = useState(0); // Start at 0 instead of null
 
-    const handleClick = async () => {
-        const image = await getAllImageUrlFromFolder(peopleCount+'-people');
-        setUrl(image);
-        // console.log(image);
-    }
-
-    // Fix 1: Wrap the test file creation in a useEffect so it only runs ONCE
+    // Fetch images when the component loads OR when peopleCount changes
     useEffect(() => {
-        const initTestFile = async () => {
-            const file = await createTestFile();
-            setLocalPicture({ file });
+        const fetchImages = async () => {
+            try {
+                const folderName = `${peopleCount}-people`;
+                const images = await getAllImageUrlFromFolder(folderName);
+                setUrls(images);
+                
+                // Pick a random starting image once images are loaded
+                if (images.length > 0) {
+                    const firstRandom = getRandomInt(0, images.length - 1);
+                    setImageIndex(firstRandom);
+                }
+            } catch (error) {
+                console.error("Failed to fetch guide images:", error);
+            }
         };
-        initTestFile();
-    }, []); // Empty array means "only run on page load"
+        fetchImages();
+    }, [peopleCount]); // Added peopleCount here so it updates if the user changes selection
 
-    return <>
-    <ul className="">
-    <li><button onClick={()=>setPeopleCount(1)}>1 person</button></li>
-    <li><button onClick={()=>setPeopleCount(2)}>2 person</button></li>
-    <li><button onClick={()=>setPeopleCount(3)}>3 person</button></li>
-    <li><button onClick={()=>setPeopleCount(4)}>4 person</button></li>
-    <li><button onClick={handleClick}>load image</button></li>
+    const handleRefresh = () => {
+        if (urls.length > 1) {
+            const newRandom = getRandomInt(0, urls.length - 1);
+            setImageIndex(newRandom);
+        }
+    };
 
-    <Button buttonType="primary" onClick={()=>sharePicture(urls[0], localPhoto.file)}>Click to Share</Button>
-    <Button buttonType="secondary" onClick={()=>downloadPicture(urls[0])}>Click to download</Button>
+    useEffect(()=>{
+        handleRefresh();
+    },[images]);
 
-
-    </ul>
-    {urls?.length > 0 && urls[0] && (
-      <Image 
-        src={urls[0]} 
-        alt="pic" 
-        width={500} 
-        height={500} // Next.js Image requires height if not using 'fill'
-      />
-    )}
-    </>
+    return (
+        <div className="flex flex-col items-center gap-4">
+            {urls.length > 0 ? (
+                <Image 
+                    src={urls[imageIndex]} 
+                    alt="Guide Pose" 
+                    width={500} 
+                    height={500}
+                    className="rounded-lg shadow-lg"
+                />
+            ) : (
+                <div className="w-[500px] h-[500px] bg-gray-200 animate-pulse flex items-center justify-center">
+                    Loading Guide...
+                </div>
+            )}
+            
+            <Button buttonType="primary" onClick={handleRefresh}>
+                Shuffle Pose
+            </Button>
+        </div>
+    );
 }
