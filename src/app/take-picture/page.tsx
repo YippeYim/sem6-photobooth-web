@@ -7,6 +7,7 @@ import { getMaxShotFromFileName, getUrlFromFileName } from "../../lib/utils";
 import { Button } from "../components/Button";
 import { Header } from "../components/Header";
 import { GuidePicture } from "../components/guide-picture/GuidePicture";
+import { Result } from "../components/Result";
 
 // 1. Move the logic into a separate inner component
 function CameraContent() {
@@ -101,6 +102,7 @@ function CameraContent() {
             <img key={i} src={img} className="w-16 rounded" alt={`Captured ${i}`} />
           ))}
         </div>
+        <Result imgUrl={images}></Result>
       </div>
 
       <div className="content-start justify-items-center">
