@@ -28,7 +28,7 @@ export default function CameraPage() {
     setMaxShots(count);
     
 
-    const frameUrl = getUrlFromFileName(frameName, "frame-bucket", `${count}-slot` , "JPG");
+    const frameUrl = getUrlFromFileName(frameName, "frame-bucket", `${count}-slot` , "png");
     setFrameUrl(frameUrl);
     console.log(frameUrl);
 
