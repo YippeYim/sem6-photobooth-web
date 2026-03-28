@@ -77,8 +77,11 @@ function CameraContent() {
   return (
     <div className="grid grid-cols-4 max-w-full">
       <div className="content-start justify-items-center">
-        {frameUrl !== "" && (
+        {frameUrl !== "" && !isDone && (
           <img className="grow-1 shick-1 max-h-2/3" src={frameUrl} alt="Frame" />
+        )}
+        { isDone && (
+          <Result imgUrl={images}></Result>
         )}
       </div>
 
@@ -102,7 +105,6 @@ function CameraContent() {
             <img key={i} src={img} className="w-16 rounded" alt={`Captured ${i}`} />
           ))}
         </div>
-        <Result imgUrl={images}></Result>
       </div>
 
       <div className="content-start justify-items-center">
