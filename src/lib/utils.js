@@ -32,7 +32,7 @@ export const getMaxShotFromFileName = (filename) => {
  * @param {string} folder - The folder inside the bucket (default: "3-slot")
  * @param {string} ext - The file extension (default: "JPG")
  */
-export const getUrlFromFileName = (fileName, bucket = "frame-bucket", folder, ext = "JPG") => {
+export const getUrlFromFileName = (fileName, bucket = "frame-bucket", folder, ext = "png") => {
   if (!fileName) return "";
 
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
