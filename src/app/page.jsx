@@ -1,6 +1,6 @@
 'use client'
 import { useEffect } from "react";
-import { Button } from "./components/Button";
+import { Button } from "../app/components/Button";
 import { useRouter } from "next/navigation";
 import { useStorage } from "./hooks/useStorage";
 import { useState } from "react";
