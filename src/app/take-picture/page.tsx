@@ -8,7 +8,6 @@ import { useSearchParams } from "next/navigation";
 import { Button } from "../components/Button";
 import { Header } from "../components/Header";
 import { GuidePicture } from "../components/guide-picture/GuidePicture";
-import { Result } from "../components/Result";
 
 export default function CameraPage() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -29,7 +28,7 @@ export default function CameraPage() {
     setMaxShots(count);
     
 
-    const frameUrl = getUrlFromFileName(frameName, "frame-bucket", `${count}-slot` , "png");
+    const frameUrl = getUrlFromFileName(frameName, "frame-bucket", `${count}-slot` , "JPG");
     setFrameUrl(frameUrl);
     console.log(frameUrl);
 
@@ -97,7 +96,7 @@ export default function CameraPage() {
         )}
 
         {isDone && (<>
-          <Result imgUrl={images}></Result>
+        
         
         </>)}
 
