@@ -8,6 +8,7 @@ import { Button } from "../components/Button";
 import { Header } from "../components/Header";
 import { GuidePicture } from "../components/guide-picture/GuidePicture";
 import { Result } from "../components/Result";
+import { PageLayout } from "../components/PageLayout";
 
 // 1. Move the logic into a separate inner component
 function CameraContent() {
@@ -118,10 +119,12 @@ function CameraContent() {
 export default function CameraPage() {
   return (
     <>
+      <PageLayout>
       <Header />
       <Suspense fallback={<div className="flex justify-center p-10">Loading Camera...</div>}>
         <CameraContent />
       </Suspense>
+      </PageLayout>
     </>
   );
 }
